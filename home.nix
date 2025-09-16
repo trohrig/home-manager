@@ -1,4 +1,4 @@
-{ config, pkgs, nur, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ./firefox.nix ];
