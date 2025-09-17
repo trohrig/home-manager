@@ -10,15 +10,21 @@
     
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-    homeConfigurations = {
-      tom = home-manager.lib.homeManagerConfiguration {
-        inherit nixpkgs;
-        modules = [
-          ./home.nix
-        ];
+  outputs = { nixpkgs, home-manager, ... }:
+    let
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    in
+    {
+      homeConfigurations = {
+        tom = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home.nix
+            ./firefox.nix
+            ./alacritty.nix
+          ];
+        };
       };
     };
-  };
 }
 

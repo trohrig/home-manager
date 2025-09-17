@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports = [ ./firefox.nix ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -17,9 +16,12 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    devilspie2
     discord
     mattermost-desktop
     spotify
@@ -30,6 +32,46 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    "${config.xdg.configHome}/autostart/devilspie2.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Exec=devilspie2
+      Name=Devilspie2
+      X-GNOME-Autostart-enabled=true
+    '';
+
+    # Layout rules for devilspie2
+    ".config/devilspie2/layout.lua".text = ''
+      -- Discord: workspace 1, left half
+      if (get_window_name() == "Discord") then
+        set_window_workspace(1)
+        set_window_geometry(0, 0, 1280, 1440)
+      end
+
+      -- Spotify: workspace 1, right half
+      if (get_window_name() == "Spotify") then
+        set_window_workspace(1)
+        set_window_geometry(1280, 0, 1280, 1440)
+      end
+
+      -- VSCodium: workspace 2, fullscreen
+      if (get_window_name() == "VSCodium") then
+        set_window_workspace(2)
+        maximize()
+      end
+
+      -- Firefox: workspace 3, fullscreen
+      if (get_window_name() == "Firefox") then
+        set_window_workspace(3)
+        maximize()
+      end
+
+      -- Alacritty: workspace 4, fullscreen
+      if (get_window_name() == "Alacritty") then
+        set_window_workspace(4)
+        maximize()
+      end
+    '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -64,4 +106,5 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
 }
