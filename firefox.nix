@@ -3,14 +3,32 @@
 {
   programs.firefox = {
     enable = true;
-	profiles.default = {
+	  profiles.default = {
 
 	  settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;		
+        "browser.toolbars.bookmarks.visibility" = "always";
 	  };
 
+	  bookmarks = {
+	    force = true;
+	    settings = [
+	      {
+	        name = "Uni";
+	        toolbar = true;
+	        bookmarks = [
+	          {
+	            name = "StudIP";
+	            keyword = "StudIP";
+	            url = "https://studip.tu-braunschweig.de/dispatch.php/my_courses";
+            }
+          ];
+	      }  
+      ];
+    };
+	  
 	  search = {
-    	    force = true;
+    	  force = true;
         default = "ddg";
         order = [ "ddg" "google" ];
 
@@ -39,22 +57,31 @@
             definedAliases = [ "@nw" ];
     		  };
 
+    		  "youtube" = {
+            urls = [{
+              template = "https://www.youtube.com/results?search_query={searchTerms}"; # Correct template URL
+            }];
+            icon = "https://www.youtube.com/favicon.ico"; # Add a valid icon URL
+            definedAliases = [ "@y" ];
+          };
+
           "bing".metaData.hidden = true;
     		  "google".metaData.alias = "@g";
         };
-      
+        
       };
 
     userContent = ''
   	  @-moz-document url("about:newtab"), url("about:blank"), url("about:home") {
     	    body {
-      	  background-color: #3a3a3a !important;
-      	  background-image: url("/home/tom/.mozilla/firefox/default/chrome/firefox_bg.jpg") !important;
-      	  background-repeat: no-repeat !important;
-      	  background-position: center !important;
-      	  background-size: cover !important;
+      	    background-color: #3a3a3a !important;
+      	    background-image: url("/home/tom/.mozilla/firefox/default/chrome/firefox_bg.jpg") !important;
+      	    background-repeat: no-repeat !important;
+      	    background-position: center !important;
+      	    background-size: cover !important;
     	    }
-		body::before {
+    	    
+		      body::before {
             content: "" !important;
             position: absolute !important;
             top: 0 !important;
@@ -63,13 +90,13 @@
             height: 100% !important;
             background-color: rgba(0, 0, 0, 0.5) !important;
             z-index: -1 !important;
-        }
-  	  }
+          }
+  	    }
 	  '';
-
-    };
+   };
     
     policies = {
+      DisplayBookmarksToolbar = "always";
         ExtensionSettings = {
           #"*".installation_mode = "blocked"; # blocks all addons except the ones specified below
 
