@@ -22,8 +22,44 @@
 	            keyword = "StudIP";
 	            url = "https://studip.tu-braunschweig.de/dispatch.php/my_courses";
             }
+            {
+              name = "Outlook";
+              url = "https://mail.tu-braunschweig.de/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fmail.tu-braunschweig.de%2fowa%2f";
+            }
+            {
+              name = "TU Connect";
+              url = "https://connect.tu-braunschweig.de/qisserver/pages/cs/sys/portal/hisinoneStartPage.faces";
+            }
           ];
-	      }  
+	      }
+
+        {
+	        name = "NixOS";
+	        toolbar = true;
+	        bookmarks = [
+	          {
+	            name = "NixOS Wiki";
+	            keyword = "StudIP";
+	            url = "https://nixos.wiki/";
+            }
+            {
+              name = "Wiki NixOS";
+              url = "https://wiki.nixos.org/wiki/NixOS_Wiki";
+            }
+            {
+              name = "Nix Packages";
+              url = "https://search.nixos.org/packages";
+            }
+            {
+              name = "Nix Options";
+              url = "https://search.nixos.org/options";
+            }
+            {
+              name = "HomeManager Appendix";
+              url = "https://nix-community.github.io/home-manager/options.xhtml";
+            }
+          ];
+	      }
       ];
     };
 	  
@@ -72,16 +108,16 @@
       };
 
     userContent = ''
-  	  @-moz-document url("about:newtab"), url("about:blank"), url("about:home") {
-    	    body {
-      	    background-color: #3a3a3a !important;
-      	    background-image: url("/home/tom/.mozilla/firefox/default/chrome/firefox_bg.jpg") !important;
-      	    background-repeat: no-repeat !important;
-      	    background-position: center !important;
-      	    background-size: cover !important;
-    	    }
-    	    
-		      body::before {
+        @-moz-document url("about:home"), url("about:newtab") {
+          body {
+            background-image: url("https://wallpapercave.com/wp/wp13416663.jpg") !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+            background-size: cover !important;
+            background-attachment: fixed !important; 
+          }
+
+          body:before {
             content: "" !important;
             position: absolute !important;
             top: 0 !important;
@@ -91,8 +127,13 @@
             background-color: rgba(0, 0, 0, 0.5) !important;
             z-index: -1 !important;
           }
-  	    }
-	  '';
+
+          main {
+            justify-content: start;
+          }
+        }        
+      '';
+
    };
     
     policies = {
