@@ -147,22 +147,28 @@
             installation_mode = "force_installed";
           };
 
-		  # Hide Youtube Shorts:
+		      # Hide Youtube Shorts:
           "{88ebde3a-4581-4c6b-8019-2a05a9e3e938}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4563088/hide_youtube_shorts-1.8.5.xpi";
             installation_mode = "force_installed";
           };
 
-		  # Dark Reader		
-		  "addon@darkreader.org" = {
+		      # Dark Reader		
+		      "addon@darkreader.org" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4535824/darkreader-4.9.110.xpi";
             installation_mode = "force_installed";
           };		
 
-		  # Return Youtube Dislikes
-		  "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
+		      # Return Youtube Dislikes
+		      "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4371820/return_youtube_dislikes-3.0.0.18.xpi";
             installation_mode = "force_installed";
+          };
+
+          # Zotero
+		      "zotero@chnm.gmu.edu" = {
+            install_url = "https://www.zotero.org/download/connector/dl?browser=firefox&version=5.0.182";
+            installation_mode = "allowed";
           };
 		
         };
